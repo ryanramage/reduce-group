@@ -12,13 +12,25 @@ module.exports = function transform(cache_db, opts) {
 
   return through.obj(function(obj, enc, next) {
 
-    if (!Array.isArray(obj)) return;
-    if (obj.length < opts.group_level) return;
+    // handle arrays
+    if (Array.isArray(obj)) {
+      if (obj.length < opts.group_level) return;
 
-    var key = obj.slice(0, opts.group_level).join(opts.seperator);
-    var value = obj[obj.length -1];
+      var key = obj.slice(0, opts.group_level).join(opts.seperator);
+      var value = obj[obj.length -1];
 
-    inc(key, value, next);
+      inc(key, value, next);
+    }
+    else if (obj.key && obj.value !== undefined) {
+      var key = obj.key;
+
+      if (Array.isArray(obj.key)) {
+        if (obj.key.length < opts.group_level) return;
+        key = obj.key.slice(0, opts.group_level).join(opts.seperator);
+      }
+      var value = obj.value || 0;
+      inc(key, value, next);
+    }
 
   }, function(cb){
     var self = this;

@@ -1,0 +1,13 @@
+{ "key": ["c3rrcv5","Robbery"], "value": 3}
+{ "key": ["c3rrcv4","Robbery"], "value": 2}
+{ "key": ["c3rrcv1","Robbery"], "value": 2}
+{ "key": ["c3rrcv0","Robbery"], "value": 1}
+{ "key": ["c3rrcyz","Robbery"], "value": 3}
+{ "key": ["c3rrcv5","Assualt"], "value": 1}
+{ "key": ["c3rrcv4","Assualt"], "value": 1}
+{ "key": ["c3rrcv1","Assualt"], "value": 1}
+{ "key": ["c3rrcv0","Robbery"], "value": 1}
+{ "key": ["c3rrcv5","Robbery"], "value": 0}
+{ "key": ["c3rrcv4","Robbery"], "value": 2}
+{ "key": ["c3rrcv1","Robbery"], "value" :1.4}
+{ "key": ["c3rrcv0","Robbery"], "value": 12}
