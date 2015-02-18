@@ -70,7 +70,7 @@ All Options
  - --group_level=1  What level to group the data at,
  - --db_module=memdown What backing to store the reduce in. Larger datasets might want 'leveldown'
  - --db_path=./data Where to store a persistent level store like leveldown.
- - --seperator='\xff' The default seperator in the underlying leveldb
+ - --separator='\xff' The default separator in the underlying leveldb
 
 
 

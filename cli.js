@@ -5,7 +5,7 @@ var pumpify = require('pumpify');
 var levelup = require('levelup');
 var options = require('rc')('ldjson-reduce-group', {
   group_level: 1,
-  seperator: '\xff',
+  separator: '\xff',
   db_path: null,
   db_module: null
 });

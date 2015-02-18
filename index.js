@@ -5,7 +5,7 @@ module.exports = function transform(cache_db, opts) {
 
   if (!opts) opts = {};
   if (!opts.group_level) opts.group_level = 1;
-  if (!opts.seperator) opts.seperator   = '\xff';
+  if (!opts.separator) opts.separator   = '\xff';
   if (!opts.terminator) opts.terminator = '\xfe';
 
   // setup the inc function on the db
@@ -17,7 +17,7 @@ module.exports = function transform(cache_db, opts) {
     if (Array.isArray(obj)) {
       if (obj.length < opts.group_level) return;
 
-      var key = obj.slice(0, opts.group_level).join(opts.seperator);
+      var key = obj.slice(0, opts.group_level).join(opts.separator);
       var value = obj[obj.length -1];
 
       inc(key, value, next);
@@ -27,7 +27,7 @@ module.exports = function transform(cache_db, opts) {
 
       if (Array.isArray(obj.key)) {
         if (obj.key.length < opts.group_level) return;
-        key = obj.key.slice(0, opts.group_level).join(opts.seperator);
+        key = obj.key.slice(0, opts.group_level).join(opts.separator);
       } else {
         // we do this so we know it originated as string
         key = key.concat(opts.terminator);
@@ -40,7 +40,7 @@ module.exports = function transform(cache_db, opts) {
     var self = this;
     cache_db.createReadStream()
       .on('data', function(data){
-        data.key = data.key.split(opts.seperator);
+        data.key = data.key.split(opts.separator);
 
         // if it is length 1, and the end char is the terminator, it was just a string key
         if (data.key.length === 1 && data.key[0][data.key[0].length - 1] === opts.terminator) {
