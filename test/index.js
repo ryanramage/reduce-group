@@ -136,3 +136,19 @@ test('module usage', function(t){
     reducer.write({ "key": ["c3rrcv0","Robbery"], "value": 12});
     reducer.end()
 })
+
+test('something', function(t){
+  var db = levelup('/t6', { db: memdown, valueEncoding: 'json' });
+  var reducer = reduce_group(db, {group_level: 1});
+
+  fs.createReadStream(path.resolve(__dirname, 'fixtures/something.json'))
+    .pipe(ldj.parse())
+    .pipe(reducer)
+    .pipe(concat(function(objs){
+      var expected = [
+        { key: ['c3rpvq4'], value: 0.05341084657998724 }
+      ];
+      t.deepEqual(objs, expected)
+      t.end();
+    }))
+})
