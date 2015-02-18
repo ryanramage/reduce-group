@@ -82,3 +82,24 @@ test('reduce key/value object, group 2', function (t) {
 
 });
 
+test('reduce key/value object, with string as key', function (t) {
+
+  var db = levelup('/t4', { db: memdown });
+  var reducer = reduce_group(db, {group_level: 2});
+
+  fs.createReadStream(path.resolve(__dirname, 'fixtures/object_key_string.ldjson'))
+    .pipe(ldj.parse())
+    .pipe(reducer)
+    .pipe(concat(function(objs){
+      var expected = [
+        { key: 'c3rrcv0', value: 14 },
+        { key: 'c3rrcv1', value: 4.4 },
+        { key: 'c3rrcv4', value: 5 },
+        { key: 'c3rrcv5', value: 4 },
+        { key: 'c3rrcyz', value: 3 }
+      ];
+      t.deepEqual(objs, expected)
+      t.end();
+    }))
+
+});
