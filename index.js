@@ -15,8 +15,8 @@ module.exports = function transform(cache_db, opts) {
     if (!Array.isArray(obj)) return;
     if (obj.length < opts.group_level) return;
 
-    var key = obj.slice(0,-1).join(opts.seperator);
-    var value = obj[opts.group_level];
+    var key = obj.slice(0, opts.group_level).join(opts.seperator);
+    var value = obj[obj.length -1];
 
     inc(key, value, next);
 
