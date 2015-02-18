@@ -137,16 +137,81 @@ test('module usage', function(t){
     reducer.end()
 })
 
-test('something', function(t){
-  var db = levelup('/t6', { db: memdown, valueEncoding: 'json' });
+test('float maths', function(t){
+  var db = levelup('/t6', { db: memdown });
   var reducer = reduce_group(db, {group_level: 1});
 
   fs.createReadStream(path.resolve(__dirname, 'fixtures/something.json'))
     .pipe(ldj.parse())
     .pipe(reducer)
-    .pipe(concat(function(objs){
+    .pipe(concat({encoding: 'object'},function(objs){
       var expected = [
         { key: ['c3rpvq4'], value: 0.05341084657998724 }
+      ];
+      t.deepEqual(objs, expected)
+      t.end();
+    }))
+})
+
+test('custom reduce function', function(t){
+  var db = levelup('/t7', { db: memdown });
+
+  var _reduce = function(accumulator, value, key) {
+    t.ok(Array.isArray(key), 'the key to the custom function is an array, not a string');
+    return 1;
+  }
+
+  var reducer = reduce_group(db, {group_level: 1, reduce: _reduce});
+
+  fs.createReadStream(path.resolve(__dirname, 'fixtures/something.json'))
+    .pipe(ldj.parse())
+    .pipe(reducer)
+    .pipe(concat({encoding: 'object'},function(objs){
+      var expected = [
+        { key: ['c3rpvq4'], value: 1 }
+      ];
+      t.deepEqual(objs, expected)
+      t.end();
+    }))
+})
+
+
+test('_count reduce function', function(t){
+  var db = levelup('/t8', { db: memdown});
+
+  var reducer = reduce_group(db, {group_level: 1, reduce: '_count'});
+
+  fs.createReadStream(path.resolve(__dirname, 'fixtures/something.json'))
+    .pipe(ldj.parse())
+    .pipe(reducer)
+    .pipe(concat({encoding: 'object'},function(objs){
+      var expected = [
+        { key: ['c3rpvq4'], value: 2 }
+      ];
+      t.deepEqual(objs, expected)
+      t.end();
+    }))
+})
+
+test('_stats reduce function', function(t){
+  var db = levelup('/t9', { db: memdown, valueEncoding: 'json' });
+
+  var reducer = reduce_group(db, {group_level: 1, reduce: '_stats'});
+
+  fs.createReadStream(path.resolve(__dirname, 'fixtures/something.json'))
+    .pipe(ldj.parse())
+    .pipe(reducer)
+    .pipe(concat({encoding: 'object'},function(objs){
+      var expected = [
+        {
+          key: ['c3rpvq4'],
+          value: {
+            count: 2,
+            max: 0.03681494823849502,
+            min: 0.016595898341492214,
+            sum: 0.05341084657998724,
+            sumsqr: 0.0016307642555642118 }
+          }
       ];
       t.deepEqual(objs, expected)
       t.end();

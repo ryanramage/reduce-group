@@ -18,7 +18,15 @@ var db_module = require(db_module_name);
 
 options.db_path = options.db_path || path.resolve(require('os').tmpdir(),  'reduce-group' + Date.now()  );
 
-var db = levelup(options.db_path, { db: db_module });
+var db_opts = {
+  db: db_module
+};
+
+if (options.reduce === '_stats') {
+  db_opts.valueEncoding = 'json'
+}
+
+var db = levelup(options.db_path, db_opts);
 
 var reducer = require('./index')(db, options);
 
