@@ -1,6 +1,6 @@
 {
   "name": "reduce-group",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Reduce objects by group levels, much like couchdb",
   "main": "index.js",
   "bin": "./cli.js",

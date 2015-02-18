@@ -103,3 +103,36 @@ test('reduce key/value object, with string as key', function (t) {
     }))
 
 });
+
+
+test('module usage', function(t){
+    var db = require('levelup')('/in/memory', { db: require('memdown') });
+    var reducer = require('..')(db);
+
+
+    reducer.pipe(concat(function(objs){
+      var expected = [
+        { key: [ 'c3rrcv0' ], value: 14 },
+        { key: [ 'c3rrcv1' ], value: 4.4 },
+        { key: [ 'c3rrcv4' ], value: 5 },
+        { key: [ 'c3rrcv5' ], value: 4 },
+        { key: [ 'c3rrcyz' ], value: 3 }
+      ];
+      t.deepEqual(objs, expected)
+      t.end();
+    }))
+    reducer.write({ "key": ["c3rrcv5","Robbery"], "value": 3});
+    reducer.write({ "key": ["c3rrcv4","Robbery"], "value": 2});
+    reducer.write({ "key": ["c3rrcv1","Robbery"], "value": 2});
+    reducer.write({ "key": ["c3rrcv0","Robbery"], "value": 1});
+    reducer.write({ "key": ["c3rrcyz","Robbery"], "value": 3});
+    reducer.write({ "key": ["c3rrcv5","Assualt"], "value": 1});
+    reducer.write({ "key": ["c3rrcv4","Assualt"], "value": 1});
+    reducer.write({ "key": ["c3rrcv1","Assualt"], "value": 1});
+    reducer.write({ "key": ["c3rrcv0","Robbery"], "value": 1});
+    reducer.write({ "key": ["c3rrcv5","Robbery"], "value": 0});
+    reducer.write({ "key": ["c3rrcv4","Robbery"], "value": 2});
+    reducer.write({ "key": ["c3rrcv1","Robbery"], "value" :1.4});
+    reducer.write({ "key": ["c3rrcv0","Robbery"], "value": 12});
+    reducer.end()
+})
