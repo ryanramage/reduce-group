@@ -27,20 +27,44 @@ cat data.json
 ["c3x2c0c","Break and Enter",0.17640552899101838]
 ```
 
-so to reduce to the sums of all Break and Enter in a geohash, do the following:
+or the ldjson can be in object format like this
+
+```
+cat data.json
+
+{ "key": ["c3rrcv5","Robbery"], "value": 3}
+{ "key": ["c3rrcv4","Robbery"], "value": 2}
+{ "key": ["c3rrcv1","Robbery"], "value": 2}
+{ "key": ["c3rrcv0","Robbery"], "value": 1}
+{ "key": ["c3rrcyz","Robbery"], "value": 3}
+{ "key": ["c3rrcv5","Assualt"], "value": 1}
+{ "key": ["c3rrcv4","Assualt"], "value": 1}
+{ "key": ["c3rrcv1","Assualt"], "value": 1}
+{ "key": ["c3rrcv0","Robbery"], "value": 1}
+{ "key": ["c3rrcv5","Robbery"], "value": 0}
+{ "key": ["c3rrcv4","Robbery"], "value": 2}
+{ "key": ["c3rrcv1","Robbery"], "value" :1.4}
+{ "key": ["c3rrcv0","Robbery"], "value": 12}
+
+```
+
+
+so to reduce to the sums of all crime types in a geohash, do the following:
 
 ```
 cat mapped.json | ldjson-reduce-group  --group_level=2
 
-{"key":["c3x2c0c","Break and Enter"],"value":"0.2756539673603193"}
-{"key":["c3x2c0b","Break and Enter"],"value":"0.07131786992142247"}
-{"key":["c3x2c0x","Break and Enter"],"value":"0.20350682717846091"}
-{"key":["c3x2c0w","Break and Enter"],"value":"0.221410262622791"}
-{"key":["c3x2c0t","Break and Enter"],"value":"0.2222547142552161"}
-{"key":["c3x2c0s","Break and Enter"],"value":"0.20580123000056702"}
+{ key: [ 'c3rrcv0', 'Robbery' ], value: 14 }
+{ key: [ 'c3rrcv1', 'Assualt' ], value: 1 }
+{ key: [ 'c3rrcv1', 'Robbery' ], value: 3.4 }
+{ key: [ 'c3rrcv4', 'Assualt' ], value: 1 }
+{ key: [ 'c3rrcv4', 'Robbery' ], value: 4 }
+{ key: [ 'c3rrcv5', 'Assualt' ], value: 1 }
+{ key: [ 'c3rrcv5', 'Robbery' ], value: 3 }
+{ key: [ 'c3rrcyz', 'Robbery' ], value: 3 }
 ```
 
-The ndjson output will be ordered by key. It is using _sum to reduce the last column, grouped by the first two columns.
+The ndjson output will be ordered by key. It is using _sum to reduce the value, grouped by the first two columns of the key.
 
 All Options
 -----------
@@ -55,7 +79,7 @@ All Options
 Future
 ------
 
-This is the first release. I plan to have input actual objects, and to provide reduce options such as _sum, _count and stats in the future.
+This is the first release. I plan to have reduce options such as _sum, _count and _stats in the future.
 
 
 
