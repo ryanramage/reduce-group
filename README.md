@@ -11,23 +11,8 @@ Install
 Usage
 -----
 
-first, find some data in ldjson format, with arrays on each line. Something like
+first, find some data in ldjson format, with objects with keys and values on each line. Something like
 
-
-```
-
-cat data.json
-
-["c3x2c0c","Break and Enter",0.09924843836930088]
-["c3x2c0b","Break and Enter",0.07131786992142247]
-["c3x2c0x","Break and Enter",0.20350682717846091]
-["c3x2c0w","Break and Enter",0.221410262622791]
-["c3x2c0t","Break and Enter",0.2222547142552161]
-["c3x2c0s","Break and Enter",0.20580123000056702]
-["c3x2c0c","Break and Enter",0.17640552899101838]
-```
-
-or the ldjson can be in object format like this
 
 ```
 cat data.json
@@ -50,6 +35,19 @@ cat data.json
 
 
 so to reduce to the sums of all crime types in a geohash, do the following:
+
+```
+cat mapped.json | ldjson-reduce-group
+
+{ key: [ 'c3rrcv0' ], value: 14 },
+{ key: [ 'c3rrcv1' ], value: 4.4 },
+{ key: [ 'c3rrcv4' ], value: 5 },
+{ key: [ 'c3rrcv5' ], value: 4 },
+{ key: [ 'c3rrcyz' ], value: 3 }
+```
+
+by default this is run with a --group_level=1. You can change the it to a level 2, like so:
+
 
 ```
 cat mapped.json | ldjson-reduce-group  --group_level=2

@@ -1,6 +1,6 @@
 {
   "name": "ldjson-reduce-group",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Reduce ldjson by group levels, much like couchdb",
   "main": "index.js",
   "bin": "./cli.js",
