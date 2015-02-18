@@ -27,20 +27,30 @@ cat data.json
 ["c3x2c0c","Break and Enter",0.17640552899101838]
 ```
 
-so to reduce to the sums of all B and E in a geohash, do the following:
+so to reduce to the sums of all Break and Enter in a geohash, do the following:
 
 ```
 cat mapped.json | ldjson-reduce-group  --group_level=2
 
-{"key":["c3x2c0c","Theft From Vehicle"],"value":"0.2756539673603193"}
-{"key":["c3x2c0b","Theft From Vehicle"],"value":"0.07131786992142247"}
-{"key":["c3x2c0x","Theft From Vehicle"],"value":"0.20350682717846091"}
-{"key":["c3x2c0w","Theft From Vehicle"],"value":"0.221410262622791"}
-{"key":["c3x2c0t","Theft From Vehicle"],"value":"0.2222547142552161"}
-{"key":["c3x2c0s","Theft From Vehicle"],"value":"0.20580123000056702"}
+{"key":["c3x2c0c","Break and Enter"],"value":"0.2756539673603193"}
+{"key":["c3x2c0b","Break and Enter"],"value":"0.07131786992142247"}
+{"key":["c3x2c0x","Break and Enter"],"value":"0.20350682717846091"}
+{"key":["c3x2c0w","Break and Enter"],"value":"0.221410262622791"}
+{"key":["c3x2c0t","Break and Enter"],"value":"0.2222547142552161"}
+{"key":["c3x2c0s","Break and Enter"],"value":"0.20580123000056702"}
 ```
 
 The ndjson output will be ordered by key. It is using _sum to reduce the last column, grouped by the first two columns.
+
+All Options
+-----------
+
+ - --group_level=1  What level to group the data at,
+ - --db_module=memdown What backing to store the reduce in. Larger datasets might want 'leveldown'
+ - --db_path=./data Where to store a persistent level store like leveldown.
+ - --seperator='\xff' The default seperator in the underlying leveldb
+
+
 
 Future
 ------
