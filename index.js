@@ -25,7 +25,9 @@ module.exports = function transform(cache_db, opts) {
     cache_db.createReadStream()
       .on('data', function(data){
         data.key = data.key.split(opts.seperator);
+        data.value = Number(data.value); // ensure a number comes out
         self.push(data);
-      });
+      })
+      .on('end', cb)
   })
 }
