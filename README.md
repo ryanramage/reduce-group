@@ -39,10 +39,10 @@ so to reduce to the sums of all crime types in a geohash, do the following:
 ```
 cat mapped.json | ldjson-reduce-group
 
-{ key: [ 'c3rrcv0' ], value: 14 },
-{ key: [ 'c3rrcv1' ], value: 4.4 },
-{ key: [ 'c3rrcv4' ], value: 5 },
-{ key: [ 'c3rrcv5' ], value: 4 },
+{ key: [ 'c3rrcv0' ], value: 14 }
+{ key: [ 'c3rrcv1' ], value: 4.4 }
+{ key: [ 'c3rrcv4' ], value: 5 }
+{ key: [ 'c3rrcv5' ], value: 4 }
 { key: [ 'c3rrcyz' ], value: 3 }
 ```
 
