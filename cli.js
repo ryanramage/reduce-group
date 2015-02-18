@@ -3,7 +3,7 @@ var path = require('path');
 var ldj = require('ldjson-stream');
 var pumpify = require('pumpify');
 var levelup = require('levelup');
-var options = require('rc')('ldjson-reduce-group', {
+var options = require('rc')('reduce-group', {
   group_level: 1,
   separator: '\xff',
   db_path: null,
@@ -16,7 +16,7 @@ if (options.db_module) {
 }
 var db_module = require(db_module_name);
 
-options.db_path = options.db_path || path.resolve(require('os').tmpdir(),  'ldjson-reduce-group' + Date.now()  );
+options.db_path = options.db_path || path.resolve(require('os').tmpdir(),  'reduce-group' + Date.now()  );
 
 var db = levelup(options.db_path, { db: db_module });
 

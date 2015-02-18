@@ -1,7 +1,7 @@
 {
-  "name": "ldjson-reduce-group",
+  "name": "reduce-group",
   "version": "1.2.0",
-  "description": "Reduce ldjson by group levels, much like couchdb",
+  "description": "Reduce objects by group levels, much like couchdb",
   "main": "index.js",
   "bin": "./cli.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ryanramage/ldjson-reduce-group"
+    "url": "https://github.com/ryanramage/reduce-group"
   },
   "keywords": [
     "ldjson",
@@ -18,9 +18,9 @@
   "author": "Ryan Ramage",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ryanramage/ldjson-reduce-group/issues"
+    "url": "https://github.com/ryanramage/reduce-group/issues"
   },
-  "homepage": "https://github.com/ryanramage/ldjson-reduce-group",
+  "homepage": "https://github.com/ryanramage/reduce-group",
   "dependencies": {
     "ldjson-stream": "^1.2.1",
     "level-inc": "^0.1.1",

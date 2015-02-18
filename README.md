@@ -1,17 +1,17 @@
-ldjson-reduce-group
+reduce-group
 ===================
 
-Reduce ldjson by group levels, much like couchdb
+Reduce objects by group levels, much like couchdb
 
 Install
 -------
 
-    npm install ldjson-reduce-group
+    npm install reduce-group
 
 Usage
 -----
 
-first, find some data in ldjson format, with objects with keys and values on each line. Something like
+first, find some data in ndjson format, with objects with keys and values on each line. Something like
 
 
 ```
@@ -37,7 +37,7 @@ cat data.json
 so to reduce to the sums of all crime types in a geohash, do the following:
 
 ```
-cat mapped.json | ldjson-reduce-group
+cat mapped.json | reduce-group
 
 { key: [ 'c3rrcv0' ], value: 14 }
 { key: [ 'c3rrcv1' ], value: 4.4 }
@@ -50,7 +50,7 @@ by default this is run with a --group_level=1. You can change the it to a level 
 
 
 ```
-cat mapped.json | ldjson-reduce-group  --group_level=2
+cat mapped.json | reduce-group  --group_level=2
 
 { key: [ 'c3rrcv0', 'Robbery' ], value: 14 }
 { key: [ 'c3rrcv1', 'Assualt' ], value: 1 }
