@@ -7,7 +7,8 @@ var options = require('rc')('reduce-group', {
   group_level: 1,
   separator: '\xff',
   db_path: null,
-  db_module: null
+  db_module: null,
+  file: null
 });
 
 var db_module_name = 'memdown';
@@ -25,6 +26,7 @@ var db_opts = {
 if (options.reduce === '_stats') {
   db_opts.valueEncoding = 'json'
 }
+if (options.file) options.reduce = require(path.resolve(process.cwd(), options.file));
 
 var db = levelup(options.db_path, db_opts);
 
