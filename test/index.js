@@ -156,7 +156,11 @@ test('float maths', function(t){
 test('custom reduce function', function(t){
   var db = levelup('/t7', { db: memdown });
 
-  var _reduce = function(accumulator, value, key) {
+  var _reduce = function(accumulator, details, key) {
+
+    t.ok(details.value > 0, 'has a value that is a number');
+    t.ok(details.src, 'has the src object');
+
     t.ok(Array.isArray(key), 'the key to the custom function is an array, not a string');
     return 1;
   }

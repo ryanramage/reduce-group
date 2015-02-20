@@ -55,7 +55,9 @@ module.exports = function transform(cache_db, opts) {
       var key = obj.slice(0, opts.group_level).join(opts.separator);
       var value = obj[obj.length -1];
 
-      inc(key, value, function(err,val){ next() });
+      var details = { src: obj, value: value }
+
+      inc(key, details, function(err,val){ next() });
     }
     else if (obj.key && obj.value !== undefined) {
       var key = obj.key;
@@ -68,7 +70,10 @@ module.exports = function transform(cache_db, opts) {
         key = key.concat(opts.terminator);
       }
       var value = obj.value || 0;
-      inc(key, value, function(err,val){ next() });
+
+      var details = { src: obj, value: value }
+
+      inc(key, details, function(err,val){ next() });
     }
 
   }, function(cb){
@@ -88,10 +93,10 @@ module.exports = function transform(cache_db, opts) {
 
 
 
-function _sum(accumulator, value) {
+function _sum(accumulator, details) {
   if (!accumulator && accumulator !== 0) accumulator = Number(0);
   else accumulator = Number(accumulator);
-  return accumulator + Number(value)
+  return accumulator + Number(details.value)
 }
 
 function _count(accumulator) {
@@ -101,8 +106,8 @@ function _count(accumulator) {
   return ++accumulator;
 }
 
-function _stats(accumulator, value) {
-  value = Number(value);
+function _stats(accumulator, details) {
+  value = Number(details.value);
   if (!accumulator) accumulator = {min: null, max: null, sum: 0, count: null, sumsqr: 0};
 
 
