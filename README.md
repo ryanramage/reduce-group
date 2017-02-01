@@ -42,6 +42,8 @@ and then
     reducer.end()
 
 
+See it run here: https://runkit.com/58923e6f56d1720014b8b4d1/58923f648417ac00141964d7
+
 Command Line Usage
 ------------------
 
